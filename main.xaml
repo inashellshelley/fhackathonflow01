@@ -1,9 +1,7 @@
 const Web3 = require('web3');
 
-// Connect to the local Ethereum node
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
-// Define the contract ABI and bytecode
 const contractABI = [{
   "constant": false,
   "inputs": [{ "name": "date", "type": "string" }, { "name": "flow", "type": "uint256" }, { "name": "color", "type": "string" }],
@@ -16,10 +14,8 @@ const contractABI = [{
 
 const contractBytecode = '0x606060405260008055341561001357600080fd5b60cb806100246000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c806360fe47b114602d575b600080fd5b60336035565b005b60486049565b6040518082815260200191505060405180910390f35b806000819055505b505600a165627a7a72305820d32f8d82165f08a064d4e7dbf4aa9f4dc4e97ebe891d7db5a5a5eeb2bb03237c0029';
 
-// Create a new contract object using the ABI and bytecode
 const contract = new web3.eth.Contract(contractABI);
 
-// Deploy the contract to the local Ethereum node
 const deploy = async () => {
   const accounts = await web3.eth.getAccounts();
   const result = await contract.deploy({
@@ -34,7 +30,6 @@ const deploy = async () => {
 
 deploy();
 
-// Get user input for menstrual flow and record it in the contract
 const recordFlow = async () => {
   const date = prompt('Enter the date of your period (DD/MM/YYYY):');
   const flow = prompt('Enter the level of menstrual flow (1-5):');
